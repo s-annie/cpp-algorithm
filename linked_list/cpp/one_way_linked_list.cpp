@@ -29,8 +29,8 @@ class IntSLList
         };
         void addToHead(int);
         void addToTail(int);
-        void deleteFromHead();  // delete the head and return its info
-        void deleteFromTail();  // delete the tail and return its info
+        int deleteFromHead();  // delete the head and return its info
+        int deleteFromTail();  // delete the tail and return its info
         bool isInList(int);
 
         IntSLLNode *head;
@@ -57,8 +57,33 @@ void IntSLList::addToTail(int el)
 }
 
 // To be implemented
-void IntSLList::deleteFromHead() {};
-void IntSLList::deleteFromTail() {};
+int IntSLList::deleteFromHead() 
+{
+    int el = head->info;
+    IntSLLNode *tmp = head;
+    if (head == tail)
+        head = tail = 0;
+    else head = head->next;
+    delete tmp;
+    return el;
+};
+
+int IntSLList::deleteFromTail() 
+{
+   int el = tail->info;
+   if (head == tail) {
+       delete head;
+       head = tail = 0;
+   }
+   else {
+       IntSLLNode *tmp;
+       for (tmp = head; tmp->next != tail; tmp = tmp->next);
+       delete tail;
+       tail = tmp;
+       tail->next = 0;
+   }
+   return el
+};
 bool IntSLList::isInList(int el) { return true; };
 
 
